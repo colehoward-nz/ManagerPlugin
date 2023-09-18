@@ -1,5 +1,6 @@
 package me.cole.managerplugin.commands;
 
+import me.cole.managerplugin.Manager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -9,6 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class GamemodeCommand implements CommandExecutor {
+    private Manager plugin;
+
+    public GamemodeCommand(Manager plugin){
+        this.plugin = plugin;
+    }
+
     public void changeGamemode(Player player, String gamemode){
         if (gamemode.equalsIgnoreCase("c") || gamemode.equalsIgnoreCase("creative")){
             player.setGameMode(GameMode.CREATIVE);
@@ -31,6 +38,7 @@ public class GamemodeCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
+            String noPerms = plugin.getConfig().getString("no-perms");
             if (player.hasPermission("manager.gamemode")){
                 if (args.length == 0){
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /gamemode <gamemode> [player]");
@@ -49,7 +57,8 @@ public class GamemodeCommand implements CommandExecutor {
                 }
             }
             else {
-                player.sendMessage(ChatColor.RED + "Insufficient permissions");
+                assert noPerms != null;
+                player.sendMessage(noPerms);
             }
         }
         return true;

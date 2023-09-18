@@ -1,0 +1,3 @@
+no-perms: '&cInsufficient permissions'
+fly-on: '&eFlight mode enabled.'
+fly-off: '&eFlight mode disabled.'

@@ -10,8 +10,15 @@ public final class Manager extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Startup logic
         System.out.println("big poopy bum holes");
-        Objects.requireNonNull(getCommand("gamemode")).setExecutor(new GamemodeCommand());
-        Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand());
+
+        // Register commands
+        Objects.requireNonNull(getCommand("gamemode")).setExecutor(new GamemodeCommand(this));
+        Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand(this));
+
+        // Configuration
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
     }
 }
