@@ -4,4 +4,6 @@ main: me.cole.managerplugin.Manager
 api-version: '1.20'
 commands:
   gamemode:
-    description: Change gamemode of a player. poo
+    description: Change gamemode of a player.
+  fly:
+    description: Toggle a players flight.

@@ -1,5 +1,6 @@
 package me.cole.managerplugin;
 
+import me.cole.managerplugin.commands.FlyCommand;
 import me.cole.managerplugin.commands.GamemodeCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,5 +12,6 @@ public final class Manager extends JavaPlugin {
     public void onEnable() {
         System.out.println("big poopy bum holes");
         Objects.requireNonNull(getCommand("gamemode")).setExecutor(new GamemodeCommand());
+        Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand());
     }
 }

@@ -41,7 +41,6 @@ public class GamemodeCommand implements CommandExecutor {
                 else if (args.length == 2){
                     Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[1]);
                     if (argumentPlayer != null){
-                        player.sendMessage(argumentPlayer.getDisplayName());
                         changeGamemode(argumentPlayer, args[0]);
                     }
                     else {
