@@ -1,0 +1,7 @@
+name: Manager
+version: '${project.version}'
+main: me.cole.managerplugin.Manager
+api-version: '1.20'
+commands:
+  gamemode:
+    description: Change gamemode of a player. poo
