@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class GamemodeCommand implements CommandExecutor {
-    private Manager plugin;
+    private final Manager plugin;
 
     public GamemodeCommand(Manager plugin){
         this.plugin = plugin;
@@ -38,6 +38,7 @@ public class GamemodeCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
+            String playerNotFound = plugin.getConfig().getString("player-not-found");
             String noPerms = plugin.getConfig().getString("no-perms");
             if (player.hasPermission("manager.gamemode")){
                 if (args.length == 0){
@@ -52,7 +53,8 @@ public class GamemodeCommand implements CommandExecutor {
                         changeGamemode(argumentPlayer, args[0]);
                     }
                     else {
-                        player.sendMessage(ChatColor.RED + "Could not find player " + args[1] + ".");
+                        assert playerNotFound != null;
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotFound) + args[1] + ".");
                     }
                 }
             }
