@@ -14,3 +14,5 @@ commands:
     description: Set the spawn location.
   spawn:
     description: Teleport to spawn location.
+  time:
+    description: Set the time in the players world.
