@@ -1,3 +1,4 @@
 me\cole\managerplugin\commands\FlyCommand.class
 me\cole\managerplugin\commands\GamemodeCommand.class
 me\cole\managerplugin\Manager.class
+me\cole\managerplugin\commands\TeleportCommand.class

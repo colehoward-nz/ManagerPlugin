@@ -7,3 +7,6 @@ commands:
     description: Change gamemode of a player.
   fly:
     description: Toggle a players flight.
+  teleport:
+    aliases: tp
+    description: Teleport to a player.

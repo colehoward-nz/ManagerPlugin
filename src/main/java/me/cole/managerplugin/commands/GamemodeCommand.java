@@ -11,35 +11,37 @@ import org.bukkit.entity.Player;
 
 public class GamemodeCommand implements CommandExecutor {
     private final Manager plugin;
+    String playerNotFound;
+    String gamemodeMessage;
+    String noPerms;
 
     public GamemodeCommand(Manager plugin){
         this.plugin = plugin;
+        this.playerNotFound = plugin.getConfig().getString("player-not-found");
+        this.gamemodeMessage = plugin.getConfig().getString("gamemode-message");
+        this.noPerms = plugin.getConfig().getString("no-perms");
     }
 
     public void changeGamemode(Player player, String gamemode){
         if (gamemode.equalsIgnoreCase("c") || gamemode.equalsIgnoreCase("creative")){
             player.setGameMode(GameMode.CREATIVE);
-            player.sendMessage(ChatColor.YELLOW + "Gamemode set to CREATIVE");
         }
         else if (gamemode.equalsIgnoreCase("s") || gamemode.equalsIgnoreCase("survival")){
             player.setGameMode(GameMode.SURVIVAL);
-            player.sendMessage(ChatColor.YELLOW + "Gamemode set to SURVIVAL");
         }
         else if (gamemode.equalsIgnoreCase("a") || gamemode.equalsIgnoreCase("adventure")){
             player.setGameMode(GameMode.ADVENTURE);
-            player.sendMessage(ChatColor.YELLOW + "Gamemode set to ADVENTURE");
         }
         else if (gamemode.equalsIgnoreCase("sp") || gamemode.equalsIgnoreCase("spec") || gamemode.equalsIgnoreCase("spectator")){
             player.setGameMode(GameMode.SPECTATOR);
-            player.sendMessage(ChatColor.YELLOW + "Gamemode set to SPECTATOR");
         }
+
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', gamemodeMessage) + ChatColor.YELLOW + player.getGameMode().toString().toUpperCase());
     }
 
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
-            String playerNotFound = plugin.getConfig().getString("player-not-found");
-            String noPerms = plugin.getConfig().getString("no-perms");
             if (player.hasPermission("manager.gamemode")){
                 if (args.length == 0){
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /gamemode <gamemode> [player]");

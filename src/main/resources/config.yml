@@ -1,3 +1,4 @@
+gamemode-message: '&eGamemode set to '
 player-not-found: '&cCould not find player '
 no-perms: '&cInsufficient permissions'
 fly-on: '&eFlight mode enabled.'
