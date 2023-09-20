@@ -17,6 +17,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new TeleportCommand(this));
         Objects.requireNonNull(getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
         Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand(this));
+        Objects.requireNonNull(getCommand("time")).setExecutor(new TimeCommand(this));
         Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand(this));
 
         // Configuration
