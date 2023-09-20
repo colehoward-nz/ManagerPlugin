@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 
 public class GamemodeCommand implements CommandExecutor {
     private final Manager plugin;
-    String playerNotFound;
-    String gamemodeMessage;
-    String noPerms;
+    private final String playerNotFound;
+    private final String gamemodeMessage;
+    private final String noPerms;
 
     public GamemodeCommand(Manager plugin){
         this.plugin = plugin;

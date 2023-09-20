@@ -10,3 +10,7 @@ commands:
   teleport:
     aliases: tp
     description: Teleport to a player.
+  setspawn:
+    description: Set the spawn location.
+  spawn:
+    description: Teleport to spawn location.
