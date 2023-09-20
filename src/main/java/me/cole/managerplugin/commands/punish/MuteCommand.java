@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MuteCommand implements CommandExecutor {
     private final Manager plugin;
@@ -18,12 +19,28 @@ public class MuteCommand implements CommandExecutor {
         this.noPerms = plugin.getConfig().getString("no-perms");
     }
 
-    public void addMute (Player staff, Player player, String reason){
-        List<String> test = plugin.getConfig().getStringList("muted_players)");
-        System.out.print(test);
-    }
+    public void mutePlayer(CommandSender staff, Player player, String reason){
+        boolean isMuted = false;
+        try {
+            isMuted = (boolean) plugin.getConfig().get("players." + player.getUniqueId().toString() + "muted");
+        } catch (NullPointerException nullPointerException) {
+            System.out.println("[Manager] nullPtrExcept in MuteCommand.addMute");
+        }
 
-    public void removeMute(Player staff, Player player, String reason) {
+        if (isMuted) {
+            if (reason == null) {
+                reason = "Not specified";
+            }
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted", true);
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted.reason", reason);
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted.applier", staff);
+
+        }
+        else {
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted", false);
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted.reason", null);
+            plugin.getConfig().set("players." + player.getUniqueId().toString() + "muted.applier", null);
+        }
 
     }
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -32,14 +49,18 @@ public class MuteCommand implements CommandExecutor {
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /mute <player> [reason]");
                 }
-                Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
-                if (args.length == 1) {
-
-                    addMute(player, argumentPlayer, null);
-                }
                 else {
-                    addMute(player, argumentPlayer, args[1]);
+                    Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
+                    if (args.length == 1) {
+                        player.sendMessage(ChatColor.YELLOW + "Mute without reason");
+                        mutePlayer(player, argumentPlayer, null);
+                    }
+                    else {
+                        player.sendMessage(ChatColor.YELLOW + "Mute with reason:\n" + argumentPlayer +"\n"+ args[1]);
+                        mutePlayer(player, argumentPlayer, args[1]);
+                    }
                 }
+
             }
             else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', noPerms));
