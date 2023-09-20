@@ -1,4 +1,4 @@
-package me.cole.managerplugin.commands;
+package me.cole.managerplugin.commands.staff;
 
 import me.cole.managerplugin.Manager;
 import org.bukkit.Bukkit;

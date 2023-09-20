@@ -1,4 +1,4 @@
-package me.cole.managerplugin.commands;
+package me.cole.managerplugin.commands.util;
 
 import me.cole.managerplugin.Manager;
 import org.bukkit.ChatColor;

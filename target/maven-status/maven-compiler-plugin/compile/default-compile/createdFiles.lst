@@ -1,7 +1,8 @@
-me\cole\managerplugin\commands\TimeCommand.class
-me\cole\managerplugin\commands\FlyCommand.class
-me\cole\managerplugin\commands\GamemodeCommand.class
-me\cole\managerplugin\commands\SetSpawnCommand.class
-me\cole\managerplugin\commands\SpawnCommand.class
+me\cole\managerplugin\commands\staff\GamemodeCommand.class
+me\cole\managerplugin\commands\staff\TeleportCommand.class
+me\cole\managerplugin\commands\util\SpawnCommand.class
+me\cole\managerplugin\commands\punish\MuteCommand.class
+me\cole\managerplugin\commands\staff\FlyCommand.class
+me\cole\managerplugin\commands\util\SetSpawnCommand.class
+me\cole\managerplugin\commands\util\TimeCommand.class
 me\cole\managerplugin\Manager.class
-me\cole\managerplugin\commands\TeleportCommand.class

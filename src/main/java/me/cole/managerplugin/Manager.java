@@ -1,6 +1,10 @@
 package me.cole.managerplugin;
 
-import me.cole.managerplugin.commands.*;
+import me.cole.managerplugin.commands.staff.*;
+import me.cole.managerplugin.commands.util.SetSpawnCommand;
+import me.cole.managerplugin.commands.util.SpawnCommand;
+import me.cole.managerplugin.commands.staff.TeleportCommand;
+import me.cole.managerplugin.commands.util.TimeCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
