@@ -36,15 +36,15 @@ public class TimeCommand implements CommandExecutor {
 
                 else if (args[0].equals("day")){
                     world.setTime(0);
-                    player.sendMessage(ChatColor.YELLOW + "Time set to DAY in your world.");
+                    player.sendMessage(ChatColor.YELLOW + "Time set to DAY in your world");
                 }
                 else if (args[0].equals("night")){
                     world.setTime(13000);
-                    player.sendMessage(ChatColor.YELLOW + "Time set to NIGHT in your world.");
+                    player.sendMessage(ChatColor.YELLOW + "Time set to NIGHT in your world");
                 }
                 else if (time <= 20000 && time >= 0) {
                     world.setTime(time);
-                    player.sendMessage(ChatColor.YELLOW + "Time set to " + time + " in your world.");
+                    player.sendMessage(ChatColor.YELLOW + "Time set to " + time + " in your world");
                 }
                 else {
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /time <day|night|time>");
