@@ -24,29 +24,23 @@ public class MuteCommand implements CommandExecutor {
         String muteReason = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted.reason");
         String muteApplier = staff.getDisplayName();
 
+
         if (isMuted == null || isMuted.equalsIgnoreCase("false")) {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "true");
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", reason);
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
             staff.sendMessage(ChatColor.YELLOW + "Mute applied successfully for " + player.getDisplayName());
             player.sendMessage(ChatColor.RED + "You have been muted by " + staff.getDisplayName() +
-                    "\nReason: " + muteReason +
-                    "\nYou can no longer type in chat");
+                    "\nYou can no longer type in chat" +
+                    "\nReason: " + reason);
         }
         else {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "false");
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed_"+muteReason);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed_"+reason);
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
             staff.sendMessage(ChatColor.YELLOW + "Mute removed successfully for " + player.getDisplayName());
             player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + muteApplier + ". You can now type in chat again");
         }
-
-        if (reason != null) {
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", reason);
-        }
-        else {
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "Not specified");
-        }
-
         plugin.saveConfig();
     }
 
