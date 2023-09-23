@@ -1,7 +1,9 @@
 me\cole\managerplugin\commands\staff\GamemodeCommand.class
 me\cole\managerplugin\commands\staff\TeleportCommand.class
 me\cole\managerplugin\commands\util\SpawnCommand.class
+me\cole\managerplugin\listeners\onPlayerChat.class
 me\cole\managerplugin\commands\punish\MuteCommand.class
+me\cole\managerplugin\commands\user\MessageCommand.class
 me\cole\managerplugin\commands\staff\FlyCommand.class
 me\cole\managerplugin\commands\util\SetSpawnCommand.class
 me\cole\managerplugin\commands\util\TimeCommand.class

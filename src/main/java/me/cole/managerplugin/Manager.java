@@ -6,6 +6,7 @@ import me.cole.managerplugin.commands.util.SetSpawnCommand;
 import me.cole.managerplugin.commands.util.SpawnCommand;
 import me.cole.managerplugin.commands.staff.TeleportCommand;
 import me.cole.managerplugin.commands.util.TimeCommand;
+import me.cole.managerplugin.listeners.onPlayerChat;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -15,7 +16,7 @@ public final class Manager extends JavaPlugin {
     @Override
     public void onEnable() {
         // Startup logic
-        //Manager plugin;
+        Manager plugin = this;
         System.out.println("[Manager] big poopy bum holes");
 
         // Register commands
@@ -28,7 +29,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand(this));
 
         // Register listeners
-        //getServer().getPluginManager().registerEvents(new onPlayerChat(plugin), this);
+        getServer().getPluginManager().registerEvents(new onPlayerChat(plugin), this);
 
         // Configuration
         getConfig().options().copyDefaults();

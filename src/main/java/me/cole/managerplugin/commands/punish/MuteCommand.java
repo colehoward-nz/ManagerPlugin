@@ -20,18 +20,21 @@ public class MuteCommand implements CommandExecutor {
     }
 
     public void mutePlayer(Player staff, Player player, String reason) {
-        String isMuted = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted");
+        String isMuted = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted.ismuted");
         String muteReason = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted.reason");
+        String muteApplier = staff.getDisplayName();
 
-        if (isMuted.equalsIgnoreCase("true")) {
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted", false);
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed_"+muteReason);
-            staff.sendMessage(ChatColor.YELLOW + "Mute removed successfully for " + player.getDisplayName());
-            player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + staff.getDisplayName() + ". You can now type in chat again");
+        if (isMuted == null || isMuted.equalsIgnoreCase("false")) {
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "true");
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
+            staff.sendMessage(ChatColor.YELLOW + "Mute applied successfully for " + player.getDisplayName());
         }
         else {
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted", true);
-            staff.sendMessage(ChatColor.YELLOW + "Mute applied successfully for " + player.getDisplayName());
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "false");
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed_"+muteReason);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
+            staff.sendMessage(ChatColor.YELLOW + "Mute removed successfully for " + player.getDisplayName());
+            player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + muteApplier + ". You can now type in chat again");
         }
 
         if (reason != null) {
