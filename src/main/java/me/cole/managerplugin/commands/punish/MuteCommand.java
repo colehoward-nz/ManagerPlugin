@@ -75,8 +75,6 @@ public class MuteCommand implements CommandExecutor {
                                     reason.append(arg);
                                 }
                             }
-
-
                         }
                         System.out.println(reason);
                         mutePlayer(player, argumentPlayer, reason.toString());

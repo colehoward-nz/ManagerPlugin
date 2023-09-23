@@ -19,3 +19,5 @@ commands:
     description: Set the time in the players world.
   mute:
     description: Mute a player from typing in chat.
+  message:
+    description: Send messages between a player

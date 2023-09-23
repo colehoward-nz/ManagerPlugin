@@ -2,6 +2,7 @@ package me.cole.managerplugin;
 
 import me.cole.managerplugin.commands.punish.MuteCommand;
 import me.cole.managerplugin.commands.staff.*;
+import me.cole.managerplugin.commands.user.MessageCommand;
 import me.cole.managerplugin.commands.util.SetSpawnCommand;
 import me.cole.managerplugin.commands.util.SpawnCommand;
 import me.cole.managerplugin.commands.staff.TeleportCommand;
@@ -23,6 +24,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("gamemode")).setExecutor(new GamemodeCommand(this));
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new TeleportCommand(this));
         Objects.requireNonNull(getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
+        Objects.requireNonNull(getCommand("message")).setExecutor(new MessageCommand(this));
         Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand(this));
         Objects.requireNonNull(getCommand("mute")).setExecutor(new MuteCommand(this));
         Objects.requireNonNull(getCommand("time")).setExecutor(new TimeCommand(this));
