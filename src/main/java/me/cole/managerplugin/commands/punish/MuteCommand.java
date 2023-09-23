@@ -28,6 +28,9 @@ public class MuteCommand implements CommandExecutor {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "true");
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
             staff.sendMessage(ChatColor.YELLOW + "Mute applied successfully for " + player.getDisplayName());
+            player.sendMessage(ChatColor.RED + "You have been muted by " + staff.getDisplayName() +
+                    "\nReason: " + muteReason +
+                    "\nYou can no longer type in chat");
         }
         else {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "false");
@@ -45,14 +48,6 @@ public class MuteCommand implements CommandExecutor {
         }
 
         plugin.saveConfig();
-
-
-        if (plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted").equalsIgnoreCase("true")) {
-            player.sendMessage(ChatColor.RED + "You have been muted by " + staff.getDisplayName() +
-                    "\nReason: " + muteReason +
-                    "\nYou can no longer type in chat");  // could have just used reason var
-                                                        // but want to see if grab from config works
-        }
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
