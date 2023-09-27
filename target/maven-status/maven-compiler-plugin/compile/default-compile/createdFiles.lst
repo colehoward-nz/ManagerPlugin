@@ -1,4 +1,5 @@
 me\cole\managerplugin\commands\staff\GamemodeCommand.class
+me\cole\managerplugin\commands\staff\GiveCommand.class
 me\cole\managerplugin\commands\punish\KickCommand.class
 me\cole\managerplugin\listeners\onPlayerChat.class
 me\cole\managerplugin\commands\punish\MuteCommand.class

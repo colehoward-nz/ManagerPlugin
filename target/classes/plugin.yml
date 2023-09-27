@@ -31,3 +31,5 @@ commands:
     description: Respond to a message.
   list:
     description: Lists all currently online players.
+  give:
+    description: Give a specified amount of any item.

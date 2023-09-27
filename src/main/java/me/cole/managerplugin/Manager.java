@@ -38,6 +38,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("mute")).setExecutor(new MuteCommand(this));
         Objects.requireNonNull(getCommand("kick")).setExecutor(new KickCommand(this));
         Objects.requireNonNull(getCommand("time")).setExecutor(new TimeCommand(this));
+        Objects.requireNonNull(getCommand("give")).setExecutor(new GiveCommand(this));
         Objects.requireNonNull(getCommand("ban")).setExecutor(new BanCommand(this));
         Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand(this));
         Objects.requireNonNull(getCommand("list")).setExecutor(new ListCommand());
