@@ -19,35 +19,44 @@ public class MuteCommand implements CommandExecutor {
         this.noPerms = plugin.getConfig().getString("no-perms");
     }
 
-    public void mutePlayer(Player staff, Player player, String reason) {
-        String isMuted = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted.ismuted");
-        String muteApplier = staff.getDisplayName();
+    public String buildString(String[] args){
+        String returnString = "";
+        for (int i = 0; i < args.length; i++) {
+            returnString += " " + args[i];
+        }
+        return returnString;
+    }
 
+    public void mutePlayer(CommandSender staff, Player player, String reason) {
+        String isMuted = plugin.getConfig().getString("player." + player.getUniqueId().toString() + ".muted.ismuted");
+        String applier = "";
+        if (staff instanceof Player staffPlayer) {
+            applier = staffPlayer.getDisplayName();
+        }
 
         if (isMuted == null || isMuted.equalsIgnoreCase("false")) {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "true");
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", reason);
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
-
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", applier);
 
             staff.sendMessage(ChatColor.YELLOW + "Mute applied successfully for " + player.getDisplayName());
-            player.sendMessage(ChatColor.RED + "You have been muted by " + staff.getDisplayName() +
+            player.sendMessage(ChatColor.RED + "You have been muted by " + applier +
                     "\nYou can no longer type in chat" +
                     "\nReason: " + reason);
         }
         else {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "false");
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed->"+reason);
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", muteApplier);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", applier);
             staff.sendMessage(ChatColor.YELLOW + "Mute removed successfully for " + player.getDisplayName());
-            player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + muteApplier + ". You can now type in chat again");
+            player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + applier + ". You can now type in chat again");
         }
         plugin.saveConfig();
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player player) {
-            if (player.hasPermission("manager.mute")) {
+            if (player.hasPermission("manager.mute") || player.isOp()) {
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /mute <player> [reason]");
                 }
@@ -63,22 +72,7 @@ public class MuteCommand implements CommandExecutor {
                 else {
                     Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
                     if (argumentPlayer != null) {
-                        StringBuilder reason = new StringBuilder();
-                        for(int i = 0; i < args.length; i++) {
-                            String arg = "";
-                            if (i != 0) {
-                                if (i == args.length-1) {
-                                    arg = args[i];
-                                    reason.append(arg);
-                                }
-                                else {
-                                    arg = args[i] + " ";
-                                    reason.append(arg);
-                                }
-                            }
-                        }
-                        System.out.println(reason);
-                        mutePlayer(player, argumentPlayer, reason.toString());
+                        mutePlayer(player, argumentPlayer, buildString(args));
                     }
                     else {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotFound));

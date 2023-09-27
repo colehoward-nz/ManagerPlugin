@@ -19,6 +19,8 @@ commands:
     description: Set the time in the players world.
   mute:
     description: Mute a player from typing in chat.
+  ban:
+    description: Ban a player from the server.
   message:
     aliases: ["msg", "m"]
-    description: Send messages between a player
+    description: Send messages between a player.

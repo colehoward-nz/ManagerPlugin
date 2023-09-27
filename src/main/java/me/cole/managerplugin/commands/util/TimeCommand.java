@@ -22,7 +22,7 @@ public class TimeCommand implements CommandExecutor {
         if (sender instanceof Player player) {
             World world = player.getWorld();
 
-            if (player.hasPermission("manager.time")) {
+            if (player.hasPermission("manager.time") || player.isOp()) {
                 int time = 0;
                 if (args.length > 0) {
                     try {

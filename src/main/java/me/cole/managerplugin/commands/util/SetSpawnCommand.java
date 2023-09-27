@@ -19,7 +19,7 @@ public class SetSpawnCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
-            if (player.hasPermission("manager.setspawn")){
+            if (player.hasPermission("manager.setspawn") || player.isOp()){
                 Location location = player.getLocation();
                 plugin.getConfig().set("spawn", location);
                 plugin.saveConfig();

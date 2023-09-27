@@ -24,7 +24,7 @@ public class TeleportCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player){
 
-            if (player.hasPermission("manager.teleport")){
+            if (player.hasPermission("manager.teleport") || player.isOp()){
                 if (args.length == 0){
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /teleport <player> [player]");
                 }

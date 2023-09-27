@@ -42,7 +42,7 @@ public class GamemodeCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
-            if (player.hasPermission("manager.gamemode")){
+            if (player.hasPermission("manager.gamemode") || player.isOp()){
                 if (args.length == 0){
                     player.sendMessage(ChatColor.RED + "Incorrect usage: /gamemode <gamemode> [player]");
                 }

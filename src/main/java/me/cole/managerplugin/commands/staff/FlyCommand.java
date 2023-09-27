@@ -40,7 +40,7 @@ public class FlyCommand implements CommandExecutor {
     }
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (sender instanceof Player player){
-            if (player.hasPermission("manager.fly")){
+            if (player.hasPermission("manager.fly") || player.isOp()){
                 if (args.length == 0) {
                     toggleFly(player);
                 }
