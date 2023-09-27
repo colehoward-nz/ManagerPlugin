@@ -19,31 +19,28 @@ public class MessageCommand implements CommandExecutor {
 
     public String buildString(String[] args){
         String returnString = "";
-        for (int i = 0; i < args.length; i++) {
-            returnString += " " + args[i];
+        for (int i = 1; i < args.length; i++) {
+            returnString += args[i] + " ";
         }
         return returnString;
     }
 
     public boolean onCommand(CommandSender sender, Command c, String s, String[] args){
         if (sender instanceof Player player) {
-            String last = plugin.getConfig().getString("player." + player.getUniqueId() + ".message.last");
             if (args.length == 0 || args.length == 1) {
                 player.sendMessage(ChatColor.RED + "Incorrect usage: /message <player> <message>");
             }
             else {
                 Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
                 if (argumentPlayer!=null){
-                    String message = buildString(args);
-                    player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "->" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + message);
-                    argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "->" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + message);
-
+                    plugin.mm.setReplyTarget(player, argumentPlayer);
+                    player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "->" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+                    argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
                 }
                 else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotFound));
                 }
             }
-            
         }
         return true;
     }

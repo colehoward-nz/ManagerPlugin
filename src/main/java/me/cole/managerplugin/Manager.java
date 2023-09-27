@@ -5,6 +5,8 @@ import me.cole.managerplugin.commands.punish.KickCommand;
 import me.cole.managerplugin.commands.punish.MuteCommand;
 import me.cole.managerplugin.commands.staff.*;
 import me.cole.managerplugin.commands.user.MessageCommand;
+import me.cole.managerplugin.commands.user.MessageManager;
+import me.cole.managerplugin.commands.user.ReplyCommand;
 import me.cole.managerplugin.commands.util.SetSpawnCommand;
 import me.cole.managerplugin.commands.util.SpawnCommand;
 import me.cole.managerplugin.commands.staff.TeleportCommand;
@@ -15,11 +17,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 
 public final class Manager extends JavaPlugin {
+    Manager plugin;
+    public MessageManager mm;
 
     @Override
     public void onEnable() {
         // Startup logic
-        Manager plugin = this;
+        plugin = this;
+        mm = new MessageManager(this);
         System.out.println("[Manager] big poopy bum holes");
 
         // Register commands
@@ -28,6 +33,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("setspawn")).setExecutor(new SetSpawnCommand(this));
         Objects.requireNonNull(getCommand("message")).setExecutor(new MessageCommand(this));
         Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand(this));
+        Objects.requireNonNull(getCommand("reply")).setExecutor(new ReplyCommand(this));
         Objects.requireNonNull(getCommand("mute")).setExecutor(new MuteCommand(this));
         Objects.requireNonNull(getCommand("kick")).setExecutor(new KickCommand(this));
         Objects.requireNonNull(getCommand("time")).setExecutor(new TimeCommand(this));

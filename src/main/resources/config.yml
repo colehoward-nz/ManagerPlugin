@@ -1,5 +1,6 @@
-gamemode-message: '&eGamemode set to '
 player-not-found: '&cCould not find player '
+no-reply-taget: '&cNo current conversation'
+gamemode-message: '&eGamemode set to '
 no-perms: '&cInsufficient permissions'
 fly-on: '&eFlight mode enabled for '
 fly-off: '&eFlight mode disabled for '

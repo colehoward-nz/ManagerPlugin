@@ -26,3 +26,6 @@ commands:
   message:
     aliases: ["msg", "m"]
     description: Send messages between a player.
+  reply:
+    aliases: ["rep", "r"]
+    description: Respond to a message.
