@@ -18,21 +18,11 @@ public class MessageCommand implements CommandExecutor {
     }
 
     public String buildString(String[] args){
-        StringBuilder returnString = new StringBuilder();
-        for(int i = 0; i < args.length; i++) {
-            String arg = "";
-            if (i != 0) {
-                if (i == args.length-1) {
-                    arg = args[i];
-                    returnString.append(arg);
-                }
-                else {
-                    arg = args[i] + " ";
-                    returnString.append(arg);
-                }
-            }
+        String returnString = "";
+        for (int i = 0; i < args.length; i++) {
+            returnString += " " + args[i];
         }
-        return returnString.toString();
+        return returnString;
     }
 
     public boolean onCommand(CommandSender sender, Command c, String s, String[] args){

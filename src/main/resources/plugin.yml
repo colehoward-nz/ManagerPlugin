@@ -20,4 +20,5 @@ commands:
   mute:
     description: Mute a player from typing in chat.
   message:
+    aliases: ["msg", "m"]
     description: Send messages between a player
