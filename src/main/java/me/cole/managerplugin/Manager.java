@@ -4,6 +4,7 @@ import me.cole.managerplugin.commands.punish.BanCommand;
 import me.cole.managerplugin.commands.punish.KickCommand;
 import me.cole.managerplugin.commands.punish.MuteCommand;
 import me.cole.managerplugin.commands.staff.*;
+import me.cole.managerplugin.commands.user.ListCommand;
 import me.cole.managerplugin.commands.user.MessageCommand;
 import me.cole.managerplugin.commands.user.MessageManager;
 import me.cole.managerplugin.commands.user.ReplyCommand;
@@ -39,6 +40,7 @@ public final class Manager extends JavaPlugin {
         Objects.requireNonNull(getCommand("time")).setExecutor(new TimeCommand(this));
         Objects.requireNonNull(getCommand("ban")).setExecutor(new BanCommand(this));
         Objects.requireNonNull(getCommand("fly")).setExecutor(new FlyCommand(this));
+        Objects.requireNonNull(getCommand("list")).setExecutor(new ListCommand());
 
         // Register listeners
         getServer().getPluginManager().registerEvents(new onPlayerChat(plugin), this);

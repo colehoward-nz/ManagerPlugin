@@ -17,7 +17,6 @@ public class ReplyCommand implements CommandExecutor {
         this.plugin = plugin;
         this.playerNotFound = plugin.getConfig().getString("player-not-found");
         this.noReplyTarget = plugin.getConfig().getString("no-reply-target");
-
     }
 
     public String buildString(String[] args){
@@ -33,12 +32,10 @@ public class ReplyCommand implements CommandExecutor {
         if (sender instanceof Player player && args.length >= 1) {
             if (plugin.mm.getReplyTarget(player) == null) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', noReplyTarget));
-                return true;
             }
-            Player argumentPlayer = plugin.mm.getReplyTarget(player);
 
-            player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
-            argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+            //player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+            //argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
         }
         return false;
     }

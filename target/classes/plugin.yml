@@ -29,3 +29,5 @@ commands:
   reply:
     aliases: ["rep", "r"]
     description: Respond to a message.
+  list:
+    description: Lists all currently online players.
