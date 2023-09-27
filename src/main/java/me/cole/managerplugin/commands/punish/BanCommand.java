@@ -21,7 +21,7 @@ public class BanCommand implements CommandExecutor {
 
     public String buildString(String[] args){
         String returnString = "";
-        for (int i = 0; i < args.length; i++) {
+        for (int i = 1; i < args.length; i++) {
             returnString += " " + args[i];
         }
         return returnString;
@@ -36,8 +36,8 @@ public class BanCommand implements CommandExecutor {
 
         if (isBanned == null || isBanned.equalsIgnoreCase("false")) {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.isbanned", "true");
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.reason", reason);
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.applier", applier);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.reason", reason);
 
             staff.sendMessage(ChatColor.YELLOW + "Ban applied successfully for " + player.getDisplayName());
             String kickReason = ChatColor.RED + "You have been banned by " + applier + ".\nReason: " + reason;
@@ -45,8 +45,8 @@ public class BanCommand implements CommandExecutor {
         }
         else {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.ismuted", "false");
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.reason", "squashed->"+reason);
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.applier", applier);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".banned.reason", "squashed ->"+reason);
             staff.sendMessage(ChatColor.YELLOW + "Ban removed successfully for " + player.getDisplayName());
         }
         plugin.saveConfig();
@@ -60,18 +60,16 @@ public class BanCommand implements CommandExecutor {
                 }
                 else {
                     Player argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
-                    if (argumentPlayer != null) {
-                        banPlayer(player, argumentPlayer, "No reason");
-                    }
-                    else {
+                    if (argumentPlayer == null) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotFound));
                     }
-
-                    if (args.length == 1) {
-                        banPlayer(player, argumentPlayer, "No reason");
-                    }
-                    else if (args.length == 2) {
-                        banPlayer(player, argumentPlayer, buildString(args));
+                    else {
+                        if (args.length == 1) {
+                            banPlayer(player, argumentPlayer, "No reason");
+                        }
+                        else {
+                            banPlayer(player, argumentPlayer, buildString(args));
+                        }
                     }
                 }
             }

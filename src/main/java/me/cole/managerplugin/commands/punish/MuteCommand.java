@@ -21,7 +21,7 @@ public class MuteCommand implements CommandExecutor {
 
     public String buildString(String[] args){
         String returnString = "";
-        for (int i = 0; i < args.length; i++) {
+        for (int i = 1; i < args.length; i++) {
             returnString += " " + args[i];
         }
         return returnString;
@@ -46,7 +46,7 @@ public class MuteCommand implements CommandExecutor {
         }
         else {
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.ismuted", "false");
-            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed->"+reason);
+            plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.reason", "squashed ->"+reason);
             plugin.getConfig().set("player." + player.getUniqueId().toString() + ".muted.applier", applier);
             staff.sendMessage(ChatColor.YELLOW + "Mute removed successfully for " + player.getDisplayName());
             player.sendMessage(ChatColor.GREEN + "You have been unmuted by " + applier + ". You can now type in chat again");
@@ -82,6 +82,16 @@ public class MuteCommand implements CommandExecutor {
             else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', noPerms));
             }
+        }
+        else {
+            Player argumentPlayer = null;
+            try {
+                argumentPlayer = Bukkit.getServer().getPlayerExact(args[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("me.cole.managerplugin.commands.punish.mutecommand : Cannot find player " + args[0]);
+            }
+            mutePlayer(sender, argumentPlayer, buildString(args));
         }
         return true;
     }

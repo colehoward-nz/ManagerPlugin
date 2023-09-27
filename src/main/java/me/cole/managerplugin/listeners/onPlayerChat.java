@@ -21,7 +21,7 @@ public class onPlayerChat implements Listener {
             String isMuted = plugin.getConfig().getString("player." + player.getUniqueId() + ".muted.ismuted");
             String muteReason = plugin.getConfig().getString("player." + player.getUniqueId() + ".muted.reason") + "\n";
             String muteApplier = plugin.getConfig().getString("player." + player.getUniqueId() + ".muted.applier") + "\n";
-            if (isMuted.equalsIgnoreCase("true")){
+            if (isMuted.equalsIgnoreCase("true") && !player.isOp()){
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You are currently muted.\n" +
                         "Reason: " + muteReason +

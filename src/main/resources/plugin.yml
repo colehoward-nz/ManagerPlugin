@@ -17,6 +17,8 @@ commands:
     description: Teleport to spawn location.
   time:
     description: Set the time in the players world.
+  kick:
+    description: Kick a player from the server.
   mute:
     description: Mute a player from typing in chat.
   ban:
