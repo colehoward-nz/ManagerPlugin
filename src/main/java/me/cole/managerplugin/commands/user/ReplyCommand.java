@@ -10,12 +10,10 @@ import org.bukkit.entity.Player;
 
 public class ReplyCommand implements CommandExecutor {
     private final Manager plugin;
-    private final String playerNotFound;
     private final String noReplyTarget;
 
     public ReplyCommand(Manager plugin) {
         this.plugin = plugin;
-        this.playerNotFound = plugin.getConfig().getString("player-not-found");
         this.noReplyTarget = plugin.getConfig().getString("no-reply-target");
     }
 
@@ -30,12 +28,14 @@ public class ReplyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if (sender instanceof Player player && args.length >= 1) {
-            if (plugin.mm.getReplyTarget(player) == null) {
+            Player argumentPlayer = plugin.mm.getReplyTarget(player);
+            if (argumentPlayer == null) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', noReplyTarget));
             }
-
-            //player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
-            //argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+            else {
+                player.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+                argumentPlayer.sendMessage(ChatColor.GRAY + "(" + ChatColor.YELLOW + argumentPlayer.getDisplayName() + ChatColor.GRAY + "<-" + ChatColor.YELLOW + player.getDisplayName() + ChatColor.GRAY + ") " + ChatColor.WHITE + buildString(args));
+            }
         }
         return false;
     }

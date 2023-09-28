@@ -20,6 +20,9 @@ public class MessageManager {
     }
 
     public Player getReplyTarget(Player messager) {
-        return conversations.get(messager);
+        if (conversations.get(messager)!=null){
+            return conversations.get(messager);
+        }
+        return null;
     }
 }
