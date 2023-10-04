@@ -26,7 +26,7 @@ public final class Manager extends JavaPlugin {
         // Startup logic
         plugin = this;
         mm = new MessageManager(this);
-        System.out.println("[Manager] big poopy bum holes");
+        System.out.println("[Manager] big booty bitches");
 
         // Register commands
         Objects.requireNonNull(getCommand("gamemode")).setExecutor(new GamemodeCommand(this));
